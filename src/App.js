@@ -1,23 +1,49 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import Header from './components/Header';
+import Product from './components/Product';
+import About from './components/about';
+import Contact  from './components/Contact';
+import {css} from "@emotion/react";
+import HashLoader from 'react-spinners/HashLoader';
+import Timeline from './components/timeline';
+import Footer from './components/footer'
+
+
 
 function App() {
+const[loading,setLoading] = useState(false);
+const override = css`
+margin-top:20%;
+margin-left: 45%;
+display:flex;
+`;
+
+useEffect(() => {
+  setLoading(true)
+  setTimeout(() => {
+    setLoading(false)
+  }, 2000)
+},[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+          {
+            loading ? <HashLoader color={"#455a64"} loading={loading} css={override} size={100} />
+            :
+            <>
+              <Navbar />
+              <Header/>
+              <Timeline/>
+              <Product/>
+              <About/>
+              <Contact/>
+              <Footer/>
+            </>
+          }
+         
     </div>
   );
 }
